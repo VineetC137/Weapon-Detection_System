@@ -1,0 +1,32 @@
+{
+    "email": {
+        "enabled": true,
+        "smtp_server": "smtp.gmail.com",
+        "smtp_port": 587,
+        "username": "your-email@gmail.com",
+        "password": "your-app-password",
+        "recipients": [
+            "security@company.com",
+            "admin@company.com"
+        ]
+    },
+    "sms": {
+        "enabled": true,
+        "twilio_account_sid": "your-twilio-account-sid",
+        "twilio_auth_token": "your-twilio-auth-token",
+        "twilio_phone_number": "+1234567890",
+        "recipients": [
+            "+1234567890",
+            "+0987654321"
+        ]
+    },
+    "webhook": {
+        "enabled": true,
+        "url": "https://your-webhook-url.com/alerts",
+        "headers": {
+            "Authorization": "Bearer your-token",
+            "Content-Type": "application/json"
+        }
+    },
+    "alert_cooldown": 300
+}
