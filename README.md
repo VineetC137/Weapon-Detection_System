@@ -1,246 +1,237 @@
-# 🛡️ Weapon Detection Surveillance System
+# Weapon Detection System
 
-A real-time weapon identification system using YOLOv5 for surveillance video cameras and smart IP cameras with real-time notifications to security staff.
+A comprehensive real-time weapon detection system built with YOLOv5, Flask API, and React frontend. This system can detect weapons like knives, pistols, rifles, and other dangerous objects using computer vision.
 
-## 🎯 Problem Statement
+## 🚀 Features
 
-To identify potential instances of violence and deter criminal activities, this system provides real-time weapon identification in surveillance video using deep learning. It can identify weapons in surveillance video cameras or smart IP cameras and give real-time notifications to security staff.
+- **Real-time Weapon Detection**: Uses YOLOv5 for accurate weapon detection
+- **Multiple Input Sources**: Supports image upload, video files, webcam, and IP cameras
+- **Web Dashboard**: Interactive React-based web interface
+- **Live Webcam Detection**: Real-time weapon detection through webcam
+- **Alert System**: Automatic alerts when weapons are detected
+- **Statistics Tracking**: Comprehensive detection statistics and history
+- **RESTful API**: Flask-based backend API for all operations
+- **Responsive Design**: Works on desktop and mobile devices
 
-## ✨ Features
+## 🛠️ Technology Stack
 
-- **Real-time Weapon Detection**: Identifies knives and pistols in live video streams
-- **Multiple Camera Support**: Works with webcams and IP cameras (RTSP/HTTP)
-- **Web-based Dashboard**: Modern, responsive interface for security staff
-- **Real-time Notifications**: Instant alerts via email, SMS, and webhooks
-- **Alert Management**: Cooldown periods and detection history
-- **High Performance**: Optimized for real-time processing
-- **Easy Configuration**: Simple setup and configuration
+### Backend
+- **Python 3.8+** with Flask
+- **YOLOv5** for object detection
+- **OpenCV** for video processing
+- **Ultralytics** for model management
+
+### Frontend
+- **React 18** with Vite
+- **Lucide React** for icons
+- **Modern CSS** with responsive design
+
+### System Components
+- **Flask API Server** (Port 5000): Handles detection requests
+- **Surveillance Server** (Port 8080): Web dashboard and monitoring
+- **React Frontend** (Port 5173/5174): User interface
+
+## 📋 Prerequisites
+
+- Python 3.8 or higher
+- Node.js 16 or higher
+- Git
+- Webcam (for live detection)
 
 ## 🚀 Quick Start
 
-### 1. Installation
-
+### 1. Clone the Repository
 ```bash
-# Clone or download the project
-cd Weapon-Detection-YOLOv5-main
+git clone https://github.com/VineetC137/Weapon-Detection_System.git
+cd Weapon-Detection_System
+```
 
-# Install dependencies
+### 2. Install Dependencies
+
+#### Backend Dependencies
+```bash
+# Install Python dependencies
 pip install -r requirements.txt
 ```
 
-### 2. Basic Usage
-
-#### Webcam Detection
+#### Frontend Dependencies
 ```bash
-python run_surveillance.py --mode webcam
+# Navigate to frontend directory
+cd frontend
+
+# Install Node.js dependencies
+npm install
 ```
 
-#### Web-based Dashboard
+### 3. Start the Servers
+
+#### Option A: Start All Servers Automatically
 ```bash
-python run_surveillance.py --mode web-server
-```
-Then open http://localhost:5000 in your browser.
+# Run the installation script (Windows)
+install.bat
 
-#### IP Camera Detection
+# Or run setup script
+python setup.py
+```
+
+#### Option B: Start Servers Manually
+
+**Backend API Server:**
 ```bash
-python run_surveillance.py --mode ip-camera
+python backend/app.py
 ```
 
-### 3. Advanced Usage
-
+**Surveillance Server:**
 ```bash
-# Custom confidence threshold
-python run_surveillance.py --mode webcam --confidence 0.7
-
-# Save processed video
-python run_surveillance.py --mode webcam --save-video
-
-# Run web server on custom port
-python run_surveillance.py --mode web-server --port 8080
-
-# Enable debug mode
-python run_surveillance.py --mode web-server --debug
+python surveillance_server.py
 ```
 
-## 📁 Project Structure
+**Frontend Development Server:**
+```bash
+cd frontend
+npm run dev
+```
 
-```
-Weapon-Detection-YOLOv5-main/
-├── README.md                          # This file
-├── requirements.txt                   # Python dependencies
-├── yolov5s.pt                        # Pre-trained YOLOv5 model
-├── weapon_detector.py                # Core detection system
-├── surveillance_server.py            # Web-based dashboard server
-├── ip_camera_detector.py             # IP camera support
-├── notification_system.py            # Alert notification system
-├── run_surveillance.py               # Main execution script
-└── templates/
-    └── dashboard.html                # Web dashboard interface
-```
+### 4. Access the Application
+
+- **Web Dashboard**: http://localhost:8080
+- **React Frontend**: http://localhost:5173
+- **API Health Check**: http://localhost:5000/health
+
+## 📖 Usage Guide
+
+### Image Upload Detection
+1. Open the React frontend at http://localhost:5173
+2. Click on "Image Upload" tab
+3. Upload an image containing weapons
+4. View detection results with bounding boxes and confidence scores
+
+### Live Webcam Detection
+1. Click on "Live Webcam" tab
+2. Grant camera permissions when prompted
+3. Click "Start Webcam" to begin real-time detection
+4. Weapons will be detected and highlighted in real-time
+5. Click "Stop Webcam" when finished
+
+### Video File Processing
+1. Use the surveillance server dashboard
+2. Upload video files for batch processing
+3. View processed videos with detection overlays
 
 ## 🔧 Configuration
 
-### Notification System
+### Detection Settings
+- **Confidence Threshold**: Adjust in `backend/detector.py` (default: 0.5)
+- **Alert Cooldown**: Set in `backend/detector.py` (default: 30 seconds)
+- **Weapon Classes**: Configure in `backend/detector.py`
 
-Create a `notification_config.json` file to configure alerts:
+### Model Configuration
+- **YOLO Model**: Uses `yolov5s.pt` by default
+- **Custom Models**: Place in project root and update paths
 
-```json
-{
-    "email": {
-        "enabled": true,
-        "smtp_server": "smtp.gmail.com",
-        "smtp_port": 587,
-        "username": "your-email@gmail.com",
-        "password": "your-app-password",
-        "recipients": ["security@company.com"]
-    },
-    "sms": {
-        "enabled": true,
-        "twilio_account_sid": "your-account-sid",
-        "twilio_auth_token": "your-auth-token",
-        "twilio_phone_number": "+1234567890",
-        "recipients": ["+1234567890"]
-    },
-    "webhook": {
-        "enabled": true,
-        "url": "https://your-webhook-url.com/alerts",
-        "headers": {
-            "Authorization": "Bearer your-token"
-        }
-    },
-    "alert_cooldown": 300
-}
-```
+## 📊 API Endpoints
 
-### IP Camera Setup
+### Health Check
+- `GET /health` - Check system health and model status
 
-For IP camera mode, update the camera configurations in `run_surveillance.py`:
+### Image Detection
+- `POST /detect-image` - Detect weapons in uploaded image
 
-```python
-camera_configs = [
-    {
-        'id': 'cam1',
-        'url': 'rtsp://username:password@192.168.1.100:554/stream',
-        'name': 'Main Entrance'
-    },
-    {
-        'id': 'cam2',
-        'url': 'http://192.168.1.102:8080/video',
-        'name': 'Reception Area'
-    }
-]
-```
+### Video Frame Detection
+- `POST /detect/video` - Process single video frame from webcam
 
-## 🎮 Web Dashboard
+### Statistics
+- `GET /stats` - Get detection statistics
 
-The web-based dashboard provides:
+### Alerts
+- `GET /alerts` - Get detection alerts history
 
-- **Live Video Feed**: Real-time surveillance with weapon detection overlays
-- **Detection Statistics**: Count of total detections, knife detections, pistol detections
-- **Alert History**: Recent weapon detection alerts with timestamps
-- **Camera Controls**: Start/stop camera, clear history
-- **Real-time Updates**: WebSocket-based live updates
+## 🎯 Detection Capabilities
 
-Access the dashboard at: http://localhost:5000
-
-## 📊 Detection Classes
-
-The system detects two weapon classes:
-
-1. **Knife** - Various types of knives and bladed weapons
-2. **Pistol** - Handguns and pistols
-
-## 🔍 Model Performance
-
-Based on the training statistics:
-
-| Class | Images | Labels | Precision | Recall | mAP@.5 | mAP@.5:.95 |
-|-------|--------|--------|-----------|--------|--------|------------|
-| All   | 697    | 799    | 0.92      | 0.839  | 0.91   | 0.618      |
-| Knife | 697    | 320    | 0.917     | 0.884  | 0.936  | 0.589      |
-| Pistol| 697    | 479    | 0.922     | 0.793  | 0.884  | 0.647      |
-
-## 🛠️ API Endpoints
-
-### Web Server API
-
-- `GET /` - Main dashboard
-- `GET /api/stats` - Get detection statistics
-- `GET /api/history` - Get detection history
-- `POST /api/start_camera` - Start camera processing
-- `POST /api/stop_camera` - Stop camera processing
-- `POST /api/clear_history` - Clear detection history
-
-### WebSocket Events
-
-- `video_frame` - Live video frame with detections
-- `weapon_alert` - Weapon detection alert
-- `connect` - Client connection
-- `disconnect` - Client disconnection
-
-## 🔒 Security Features
-
-- **Alert Cooldown**: Prevents spam alerts for the same location
-- **Detection History**: Maintains log of all detections
-- **Image Capture**: Saves alert images for evidence
-- **Real-time Monitoring**: Continuous surveillance with instant alerts
-- **Multi-channel Notifications**: Email, SMS, and webhook alerts
-
-## 📱 Mobile Support
-
-The web dashboard is fully responsive and works on:
-- Desktop computers
-- Tablets
-- Mobile phones
-- Security monitoring stations
+The system can detect various weapons including:
+- 🔫 Pistols and handguns
+- 🔫 Rifles and long guns  
+- 🔪 Knives and blades
+- ⚔️ Swords and machetes
+- 🗡️ Other sharp weapons
 
 ## 🚨 Alert System
 
-When a weapon is detected:
+- **Automatic Alerts**: Triggered when weapons are detected
+- **Alert Images**: Saves snapshots of detection events
+- **Alert History**: Maintains history of all alerts
+- **Cooldown Period**: Prevents spam alerts (30 seconds)
 
-1. **Visual Alert**: Bounding box around detected weapon
-2. **Console Log**: Detailed detection information
-3. **Image Capture**: Alert image saved with timestamp
-4. **Real-time Notification**: Instant alert to security staff
-5. **Dashboard Update**: Live update on web interface
+## 📱 System Architecture
 
-## 🔧 Troubleshooting
+```
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   React Frontend│    │   Flask API     │    │  YOLOv5 Model   │
+│   (Port 5173)   │◄──►│  (Port 5000)    │◄──►│  (Detection)    │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         ▼                       ▼                       ▼
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│  Web Dashboard  │    │  Video/Frame    │    │  Alert System   │
+│  (Port 8080)    │    │  Processing     │    │  & Statistics   │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+```
+
+## 🔒 Security Considerations
+
+- **Privacy**: All processing is done locally
+- **No External APIs**: No data sent to external services
+- **Local Storage**: Images and videos stored locally
+- **Access Control**: Implement authentication for production use
+
+## 🐛 Troubleshooting
 
 ### Common Issues
 
-1. **Camera not opening**: Check camera permissions and USB connection
-2. **Model not loading**: Ensure `yolov5s.pt` is in the project directory
-3. **Low detection accuracy**: Adjust confidence threshold with `--confidence` parameter
-4. **IP camera connection**: Verify camera URL and credentials
+**Camera Not Working:**
+- Ensure camera permissions are granted
+- Check if camera is being used by another application
+- Try refreshing the page
 
-### Performance Optimization
+**Model Loading Issues:**
+- Verify `yolov5s.pt` file exists
+- Check Python dependencies are installed
+- Restart the backend server
 
-- Use GPU acceleration if available
-- Adjust confidence threshold based on requirements
-- Limit number of simultaneous camera streams
-- Use appropriate video resolution
+**Frontend Build Issues:**
+- Clear node_modules and reinstall: `rm -rf node_modules && npm install`
+- Check Node.js version compatibility
 
-## 📈 Future Enhancements
-
-- [ ] Support for more weapon types
-- [ ] Face recognition integration
-- [ ] Mobile app for security staff
-- [ ] Cloud storage integration
-- [ ] Advanced analytics dashboard
-- [ ] Integration with existing security systems
+**Port Conflicts:**
+- Ensure ports 5000, 8080, and 5173 are available
+- Modify ports in configuration files if needed
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit pull requests or open issues for bugs and feature requests.
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
 ## 📄 License
 
-This project is for educational and security purposes. Please ensure compliance with local laws and regulations when using this system.
+This project is open source and available under the MIT License.
 
-## ⚠️ Disclaimer
+## 🙏 Acknowledgments
 
-This system is designed for security and surveillance purposes. Users are responsible for ensuring compliance with applicable laws and regulations regarding surveillance and privacy in their jurisdiction.
+- YOLOv5 by Ultralytics for the detection model
+- Flask for the web framework
+- React for the frontend framework
+- OpenCV for computer vision capabilities
+
+## 📞 Support
+
+For issues and questions:
+- Create an issue on GitHub
+- Check the troubleshooting section
+- Review the documentation
 
 ---
 
-**🛡️ Stay Safe - Real-time Weapon Detection for Enhanced Security**
+**⭐ Star this repository if you find it helpful!**
