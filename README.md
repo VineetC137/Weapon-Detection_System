@@ -1,237 +1,235 @@
-# Weapon Detection System
+🔫 Weapon Detection System (YOLOv8)
+📌 Overview
 
-A comprehensive real-time weapon detection system built with YOLOv5, Flask API, and React frontend. This system can detect weapons like knives, pistols, rifles, and other dangerous objects using computer vision.
+The Weapon Detection System is an AI-powered computer vision project that uses YOLOv8 to detect weapons such as Guns and Knives from images and video feeds.
+This project is designed to help enhance public safety and security monitoring by providing real-time alerts and automated detection, reducing the reliance on manual CCTV monitoring.
 
-## 🚀 Features
+Key highlights:
 
-- **Real-time Weapon Detection**: Uses YOLOv5 for accurate weapon detection
-- **Multiple Input Sources**: Supports image upload, video files, webcam, and IP cameras
-- **Web Dashboard**: Interactive React-based web interface
-- **Live Webcam Detection**: Real-time weapon detection through webcam
-- **Alert System**: Automatic alerts when weapons are detected
-- **Statistics Tracking**: Comprehensive detection statistics and history
-- **RESTful API**: Flask-based backend API for all operations
-- **Responsive Design**: Works on desktop and mobile devices
+🚀 Built using YOLOv8 (Ultralytics)
 
-## 🛠️ Technology Stack
+📷 Detects two classes: Gun, Knife
 
-### Backend
-- **Python 3.8+** with Flask
-- **YOLOv5** for object detection
-- **OpenCV** for video processing
-- **Ultralytics** for model management
+🧠 Trained on 4000–5000 images
 
-### Frontend
-- **React 18** with Vite
-- **Lucide React** for icons
-- **Modern CSS** with responsive design
+⚡ Supports real-time inference (images or CCTV feed)
 
-### System Components
-- **Flask API Server** (Port 5000): Handles detection requests
-- **Surveillance Server** (Port 8080): Web dashboard and monitoring
-- **React Frontend** (Port 5173/5174): User interface
+🖥️ Beginner-friendly setup for reproducibility
 
-## 📋 Prerequisites
+👥 Team Details
 
-- Python 3.8 or higher
-- Node.js 16 or higher
-- Git
-- Webcam (for live detection)
+Team Name: AI Defenders
 
-## 🚀 Quick Start
+Team Members:
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/VineetC137/Weapon-Detection_System.git
-cd Weapon-Detection_System
-```
+Vineet Unde
 
-### 2. Install Dependencies
+[Member 2 Name]
 
-#### Backend Dependencies
-```bash
-# Install Python dependencies
-pip install -r requirements.txt
-```
+[Member 3 Name]
 
-#### Frontend Dependencies
-```bash
-# Navigate to frontend directory
-cd frontend
+🚨 Problem Statement
 
-# Install Node.js dependencies
-npm install
-```
+Security systems today heavily rely on manual CCTV monitoring. This comes with challenges:
 
-### 3. Start the Servers
+👀 Human operators often miss critical moments due to fatigue or distractions.
 
-#### Option A: Start All Servers Automatically
-```bash
-# Run the installation script (Windows)
-install.bat
+⏳ Delayed detection of weapons can escalate into serious incidents.
 
-# Or run setup script
-python setup.py
-```
+🔒 There is a need for a fast, automated, and reliable system that can detect weapons in real time.
 
-#### Option B: Start Servers Manually
+💡 Proposed Solution
 
-**Backend API Server:**
-```bash
-python backend/app.py
-```
+We propose a YOLOv8-based solution that automatically detects weapons (Gun & Knife) in CCTV footage or images.
+The model is trained on thousands of labeled images to ensure high accuracy.
 
-**Surveillance Server:**
-```bash
-python surveillance_server.py
-```
+System features:
 
-**Frontend Development Server:**
-```bash
-cd frontend
-npm run dev
-```
+✅ Detects Guns and Knives with bounding boxes and confidence scores.
 
-### 4. Access the Application
+✅ Provides real-time inference from webcam/CCTV.
 
-- **Web Dashboard**: http://localhost:8080
-- **React Frontend**: http://localhost:5173
-- **API Health Check**: http://localhost:5000/health
+✅ Lightweight models (YOLOv8n/m) for faster training & inference.
 
-## 📖 Usage Guide
+✅ Scalable for more classes in the future.
 
-### Image Upload Detection
-1. Open the React frontend at http://localhost:5173
-2. Click on "Image Upload" tab
-3. Upload an image containing weapons
-4. View detection results with bounding boxes and confidence scores
+🏗️ System Architecture
+Input (Image/Video/CCTV)
+        │
+        ▼
+Preprocessing (resize, augment, normalize)
+        │
+        ▼
+YOLOv8 Model (Gun/Knife detection)
+        │
+        ▼
+Bounding Boxes + Confidence Scores
+        │
+        ▼
+Alert System (future scope: notifications, dashboards)
 
-### Live Webcam Detection
-1. Click on "Live Webcam" tab
-2. Grant camera permissions when prompted
-3. Click "Start Webcam" to begin real-time detection
-4. Weapons will be detected and highlighted in real-time
-5. Click "Stop Webcam" when finished
 
-### Video File Processing
-1. Use the surveillance server dashboard
-2. Upload video files for batch processing
-3. View processed videos with detection overlays
+📌 A clean architecture diagram (recommended: eraser.io, draw.io, or PPT export) should be placed in docs/architecture.png.
 
-## 🔧 Configuration
+🛠️ Tech Stack
 
-### Detection Settings
-- **Confidence Threshold**: Adjust in `backend/detector.py` (default: 0.5)
-- **Alert Cooldown**: Set in `backend/detector.py` (default: 30 seconds)
-- **Weapon Classes**: Configure in `backend/detector.py`
+Languages & Frameworks:
 
-### Model Configuration
-- **YOLO Model**: Uses `yolov5s.pt` by default
-- **Custom Models**: Place in project root and update paths
+Python 3.12
 
-## 📊 API Endpoints
+PyTorch (Deep Learning Framework)
 
-### Health Check
-- `GET /health` - Check system health and model status
+Ultralytics YOLOv8
 
-### Image Detection
-- `POST /detect-image` - Detect weapons in uploaded image
+Libraries:
 
-### Video Frame Detection
-- `POST /detect/video` - Process single video frame from webcam
+OpenCV → for image/video handling
 
-### Statistics
-- `GET /stats` - Get detection statistics
+NumPy, Matplotlib → for visualization
 
-### Alerts
-- `GET /alerts` - Get detection alerts history
+Pandas → dataset management
 
-## 🎯 Detection Capabilities
+Tools:
 
-The system can detect various weapons including:
-- 🔫 Pistols and handguns
-- 🔫 Rifles and long guns  
-- 🔪 Knives and blades
-- ⚔️ Swords and machetes
-- 🗡️ Other sharp weapons
+Jupyter Notebook (training & experimentation)
 
-## 🚨 Alert System
+VS Code (development)
 
-- **Automatic Alerts**: Triggered when weapons are detected
-- **Alert Images**: Saves snapshots of detection events
-- **Alert History**: Maintains history of all alerts
-- **Cooldown Period**: Prevents spam alerts (30 seconds)
+GitHub (version control & collaboration)
 
-## 📱 System Architecture
+📂 Dataset
 
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   React Frontend│    │   Flask API     │    │  YOLOv5 Model   │
-│   (Port 5173)   │◄──►│  (Port 5000)    │◄──►│  (Detection)    │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                       │                       │
-         ▼                       ▼                       ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│  Web Dashboard  │    │  Video/Frame    │    │  Alert System   │
-│  (Port 8080)    │    │  Processing     │    │  & Statistics   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
+Total images: 4000–5000
 
-## 🔒 Security Considerations
+Classes:
 
-- **Privacy**: All processing is done locally
-- **No External APIs**: No data sent to external services
-- **Local Storage**: Images and videos stored locally
-- **Access Control**: Implement authentication for production use
+Gun
 
-## 🐛 Troubleshooting
+Knife
 
-### Common Issues
+Annotation format: YOLO TXT format (class_id x_center y_center width height)
 
-**Camera Not Working:**
-- Ensure camera permissions are granted
-- Check if camera is being used by another application
-- Try refreshing the page
+Data split:
 
-**Model Loading Issues:**
-- Verify `yolov5s.pt` file exists
-- Check Python dependencies are installed
-- Restart the backend server
+Train: 80%
 
-**Frontend Build Issues:**
-- Clear node_modules and reinstall: `rm -rf node_modules && npm install`
-- Check Node.js version compatibility
+Validation: 20%
 
-**Port Conflicts:**
-- Ensure ports 5000, 8080, and 5173 are available
-- Modify ports in configuration files if needed
+Test: Empty (future use)
 
-## 🤝 Contributing
+Folder Structure:
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+Weapon_Detection_System/
+└── dataset/
+    ├── train/
+    │   ├── images/
+    │   │   ├── Gun/
+    │   │   └── Knife/
+    │   └── labels/
+    │       ├── Gun/
+    │       └── Knife/
+    ├── val/
+    │   ├── images/
+    │   │   ├── Gun/
+    │   │   └── Knife/
+    │   └── labels/
+    │       ├── Gun/
+    │       └── Knife/
+    └── test/   # empty
 
-## 📄 License
+📑 Data.yaml File
+# Dataset configuration for YOLOv8
+path: D:/ASSIGNMENTS VIIT/SEM 5/AISSMS HACKATHON/Weapon_Detection_System/dataset
 
-This project is open source and available under the MIT License.
+train: train/images
+val: val/images
+test: test/images  # currently empty
 
-## 🙏 Acknowledgments
+# Number of classes
+nc: 2
 
-- YOLOv5 by Ultralytics for the detection model
-- Flask for the web framework
-- React for the frontend framework
-- OpenCV for computer vision capabilities
+# Class names
+names: ["Gun", "Knife"]
 
-## 📞 Support
+⚙️ Installation & Setup
+🔹 1. Clone Repository
+git clone https://github.com/your-username/weapon-detection-system.git
+cd weapon-detection-system
 
-For issues and questions:
-- Create an issue on GitHub
-- Check the troubleshooting section
-- Review the documentation
+🔹 2. Create Virtual Environment
+python -m venv yolov8env
+yolov8env\Scripts\activate   # (Windows)
 
----
+🔹 3. Install Dependencies
+pip install ultralytics opencv-python matplotlib numpy pandas
 
-**⭐ Star this repository if you find it helpful!**
+🔹 4. Open Jupyter Lab
+jupyter lab
+
+🏋️ Training the Model
+from ultralytics import YOLO
+
+# Load YOLOv8n (fast and lightweight)
+model = YOLO("yolov8n.pt")
+
+# Train
+model.train(
+    data="D:/ASSIGNMENTS VIIT/SEM 5/AISSMS HACKATHON/Weapon_Detection_System/dataset/data.yaml",
+    epochs=30,       # number of epochs
+    imgsz=640,       # image size
+    batch=16,        # batch size
+    name="weapon_detection",
+    workers=4        # workers for dataloading
+)
+
+🔍 Inference (Prediction)
+
+Run inference on an image:
+
+results = model.predict("test_image.jpg", show=True)
+
+
+Run inference on webcam:
+
+results = model.predict(source=0, show=True)  # 0 = default webcam
+
+📊 Results & Metrics
+
+Training Dataset: 4000+ images
+
+Validation Dataset: 1000+ images
+
+Classes: Gun, Knife
+
+Expected results:
+
+mAP50 ≈ 0.75–0.85 (depends on training)
+
+High precision on clear images
+
+Some false positives on complex backgrounds (limitation)
+
+(Insert screenshots of training curves and detection outputs here)
+
+🚀 Future Scope
+
+Add more weapon types (rifles, bombs, etc.)
+
+Real-time notification system (SMS/Email/Telegram alerts)
+
+Deployment as Flask/Django web app
+
+Optimize for edge devices (Jetson Nano, Raspberry Pi)
+
+📜 License
+
+This project is developed for educational and hackathon purposes only.
+Not intended for deployment in real-world critical surveillance without security evaluation.
+
+🙌 Acknowledgements
+
+Ultralytics YOLOv8
+
+OpenCV Community
+
+Hackathon Organizers
