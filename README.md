@@ -1,233 +1,164 @@
-🔫 Weapon Detection System (YOLOv8)
-📌 Overview
+# 🔫 Weapon Detection System using YOLOv8
 
-The Weapon Detection System is an AI-powered computer vision project that uses YOLOv8 to detect weapons such as Guns and Knives from images and video feeds.
-This project is designed to help enhance public safety and security monitoring by providing real-time alerts and automated detection, reducing the reliance on manual CCTV monitoring.
+An AI-powered real-time weapon detection system that identifies **Guns and Knives** from images, videos, and live CCTV feeds using **YOLOv8**.
 
-Key highlights:
+---
 
-🚀 Built using YOLOv8 (Ultralytics)
+## 📌 Overview
 
-📷 Detects two classes: Gun, Knife
+Manual CCTV monitoring is error-prone and slow. This system automates the detection of weapons to improve surveillance response time and public safety using deep learning.
 
-🧠 Trained on 4000–5000 images
+---
 
-⚡ Supports real-time inference (images or CCTV feed)
+## ✨ Features
 
-🖥️ Beginner-friendly setup for reproducibility
+- Detects **Gun** and **Knife** with bounding boxes & confidence scores  
+- Real-time webcam / CCTV feed detection  
+- YOLOv8 lightweight architecture for faster inference  
+- Scalable for additional weapon classes  
 
-👥 Team Details
+---
 
-Team Name: AI Defenders
+## 👥 Team Details
 
-Team Members:
+**Team Name:** AI Defenders  
 
-Vineet Unde
+| Name |
+|------|
+| Vineet Unde |
+| Shraddha Bhadane |
+---
 
-[Member 2 Name]
+## 🚨 Problem Statement
 
-[Member 3 Name]
+Traditional surveillance depends on human operators who may miss critical events due to fatigue or distractions, causing delayed reactions to violent incidents.
 
-🚨 Problem Statement
+---
 
-Security systems today heavily rely on manual CCTV monitoring. This comes with challenges:
+## 💡 Proposed Solution
 
-👀 Human operators often miss critical moments due to fatigue or distractions.
+A YOLOv8-based automated detection system trained on thousands of weapon images to identify guns and knives instantly in real-time.
 
-⏳ Delayed detection of weapons can escalate into serious incidents.
+---
 
-🔒 There is a need for a fast, automated, and reliable system that can detect weapons in real time.
-
-💡 Proposed Solution
-
-We propose a YOLOv8-based solution that automatically detects weapons (Gun & Knife) in CCTV footage or images.
-The model is trained on thousands of labeled images to ensure high accuracy.
-
-System features:
-
-✅ Detects Guns and Knives with bounding boxes and confidence scores.
-
-✅ Provides real-time inference from webcam/CCTV.
-
-✅ Lightweight models (YOLOv8n/m) for faster training & inference.
-
-✅ Scalable for more classes in the future.
-
-🏗️ System Architecture
-Input (Image/Video/CCTV)
-        │
-        ▼
-Preprocessing (resize, augment, normalize)
-        │
-        ▼
-YOLOv8 Model (Gun/Knife detection)
-        │
-        ▼
+## 🏗️ System Architecture
+Input (Image / Video / CCTV)
+│
+▼
+Preprocessing (Resize, Normalize, Augmentation)
+│
+▼
+YOLOv8 Model
+│
+▼
 Bounding Boxes + Confidence Scores
-        │
-        ▼
-Alert System (future scope: notifications, dashboards)
+│
+▼
+Alert System (Future Scope)
 
 
-📌 A clean architecture diagram (recommended: eraser.io, draw.io, or PPT export) should be placed in docs/architecture.png.
+---
 
-🛠️ Tech Stack
+## 🛠️ Tech Stack
 
-Languages & Frameworks:
+| Component | Tools |
+|---------|------|
+| Language | Python 3.12 |
+| Framework | PyTorch |
+| Model | YOLOv8 (Ultralytics) |
+| Libraries | OpenCV, NumPy, Pandas, Matplotlib |
+| Tools | Jupyter Notebook, VS Code, GitHub |
 
-Python 3.12
+---
 
-PyTorch (Deep Learning Framework)
+## 📂 Dataset
 
-Ultralytics YOLOv8
+| Category | Details |
+|--------|--------|
+| Total Images | 4000–5000 |
+| Classes | Gun, Knife |
+| Split | 80% Train / 20% Validation |
+| Format | YOLO TXT |
 
-Libraries:
+---
 
-OpenCV → for image/video handling
-
-NumPy, Matplotlib → for visualization
-
-Pandas → dataset management
-
-Tools:
-
-Jupyter Notebook (training & experimentation)
-
-VS Code (development)
-
-GitHub (version control & collaboration)
-
-📂 Dataset
-
-Total images: 4000–5000
-
-Classes:
-
-Gun
-
-Knife
-
-Annotation format: YOLO TXT format (class_id x_center y_center width height)
-
-Data split:
-
-Train: 80%
-
-Validation: 20%
-
-Test: Empty (future use)
-
-Folder Structure:
+## 📁 Dataset Structure
 
 Weapon_Detection_System/
 └── dataset/
-    ├── train/
-    │   ├── images/
-    │   │   ├── Gun/
-    │   │   └── Knife/
-    │   └── labels/
-    │       ├── Gun/
-    │       └── Knife/
-    ├── val/
-    │   ├── images/
-    │   │   ├── Gun/
-    │   │   └── Knife/
-    │   └── labels/
-    │       ├── Gun/
-    │       └── Knife/
-    └── test/   # empty
+├── train/
+│ ├── images/
+│ └── labels/
+├── val/
+│ ├── images/
+│ └── labels/
+└── test/
+---
 
-📑 Data.yaml File
-# Dataset configuration for YOLOv8
-path: D:/ASSIGNMENTS VIIT/SEM 5/AISSMS HACKATHON/Weapon_Detection_System/dataset
+## 📑 data.yaml
 
+```yaml
+path: dataset
 train: train/images
 val: val/images
-test: test/images  # currently empty
-
-# Number of classes
+test: test/images
 nc: 2
-
-# Class names
 names: ["Gun", "Knife"]
-
-⚙️ Installation & Setup
-🔹 1. Clone Repository
-git clone https://github.com/your-username/weapon-detection-system.git
-cd weapon-detection-system
-
-🔹 2. Create Virtual Environment
+⚙️ Installation
+```bash
+Copy code
+git clone https://github.com/VineetC137/Weapon-Detection_System.git
+cd Weapon-Detection_System
 python -m venv yolov8env
-yolov8env\Scripts\activate   # (Windows)
-
-🔹 3. Install Dependencies
+yolov8env\Scripts\activate
 pip install ultralytics opencv-python matplotlib numpy pandas
-
-🔹 4. Open Jupyter Lab
-jupyter lab
-
-🏋️ Training the Model
+🏋️ Training
+```bash
+python
+Copy code
 from ultralytics import YOLO
 
-# Load YOLOv8n (fast and lightweight)
 model = YOLO("yolov8n.pt")
 
-# Train
 model.train(
-    data="D:/ASSIGNMENTS VIIT/SEM 5/AISSMS HACKATHON/Weapon_Detection_System/dataset/data.yaml",
-    epochs=30,       # number of epochs
-    imgsz=640,       # image size
-    batch=16,        # batch size
-    name="weapon_detection",
-    workers=4        # workers for dataloading
+    data="dataset/data.yaml",
+    epochs=30,
+    imgsz=640,
+    batch=16,
+    name="weapon_detection"
 )
+-----
 
-🔍 Inference (Prediction)
+🔍 Inference
+```bash
+Run on Image
+python
+Copy code
+model.predict("test.jpg", show=True)
+Run on Webcam
+python
+Copy code
+model.predict(source=0, show=True)
+-------
+📊 Results
+Metric	Value
+mAP50	0.75 – 0.85
+Precision	High
+Limitation	False positives on cluttered backgrounds
+-------
+🚀 Future Enhancements
+Add detection for more weapon classes
 
-Run inference on an image:
+Integrate real-time alert notifications
 
-results = model.predict("test_image.jpg", show=True)
+Deploy as a Flask/Django web application
 
-
-Run inference on webcam:
-
-results = model.predict(source=0, show=True)  # 0 = default webcam
-
-📊 Results & Metrics
-
-Training Dataset: 4000+ images
-
-Validation Dataset: 1000+ images
-
-Classes: Gun, Knife
-
-Expected results:
-
-mAP50 ≈ 0.75–0.85 (depends on training)
-
-High precision on clear images
-
-Some false positives on complex backgrounds (limitation)
-
-(Insert screenshots of training curves and detection outputs here)
-
-🚀 Future Scope
-
-Add more weapon types (rifles, bombs, etc.)
-
-Real-time notification system (SMS/Email/Telegram alerts)
-
-Deployment as Flask/Django web app
-
-Optimize for edge devices (Jetson Nano, Raspberry Pi)
-
+Optimize model for edge devices
+-------
 📜 License
-
-This project is developed for educational and hackathon purposes only.
-Not intended for deployment in real-world critical surveillance without security evaluation.
-
+This project is for educational and hackathon use only.
+--------
 🙌 Acknowledgements
-
 Ultralytics YOLOv8
 
 OpenCV Community
